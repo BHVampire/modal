@@ -1,28 +1,18 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import './Modal.scss'
 
 const Modal = ({ content }) => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(true)
 
-    useEffect(() => {
-        setIsOpen(true)
-    }, [])
+    return isOpen
+        ? <Fragment>
+            <div onClick={() => setIsOpen(false)} className="modal-background" />
 
-    return (
-        <Fragment>
-            {
-                isOpen
-                    ? <Fragment>
-                        <div onClick={() => setIsOpen(false)} className="modal-background" />
-
-                        <div className="modal" >
-                            {content}
-                        </div>
-                    </Fragment>
-                    : ''
-            }
+            <div className="modal" >
+                {content}
+            </div>
         </Fragment>
-    )
+        : ''
 }
 
 export default Modal
